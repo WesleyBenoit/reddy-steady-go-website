@@ -8,8 +8,8 @@ Reddy Steady Go LLC is an Omaha, Nebraska contractor providing concrete, masonry
 - Owner / principal contact: Kris Reddy
 - Address: 13811 L Street, Omaha, NE 68137
 - Phone: (402) 415-9253
-- Email: kris@pave911.com
-- Website: https://wesleybenoit.github.io/reddy-steady-go-website/
+- Email: Kris@reddysteadygo.com
+- Website: https://reddysteadygo.com/
 
 ## Services
 
@@ -26,10 +26,20 @@ Omaha, Papillion, La Vista, Bellevue, Ralston, Millard, Elkhorn, Gretna, and Cou
 
 Reddy Steady Go LLC works with homeowners, property managers, commercial operators, general contractors, and municipal buyers. Written scope, company details, NAICS classifications, insurance documentation, references, and project-specific review information can be requested directly from Kris Reddy.
 
+## Website Features
+
+- The visual identity uses the supplied RSG shield/road logo and a black, red, gold, and concrete-silver theme.
+- The homepage includes an interactive project planner that helps visitors create a concise estimate request for concrete, masonry, commercial paving, or concrete repair work.
+- The contact form can receive a prefilled estimate message from the planner and falls back to a prefilled email when no form-service key is configured.
+- The capabilities page includes a buyer hub with a procurement packet request link, bid intake checklist, and print-ready capability page.
+- The capabilities page includes a one-click company information copy action for procurement and prime-contractor review.
+- Desktop visitors get a page-aware quick-action dock for project planning, phone calls, estimates, and buyer information.
+- The homepage service-area router points visitors to local pages for Papillion, Bellevue, La Vista, Elkhorn, Council Bluffs, and the Omaha metro.
+
 ## Key Pages
 
-- Home: https://wesleybenoit.github.io/reddy-steady-go-website/
-- Services: https://wesleybenoit.github.io/reddy-steady-go-website/services.html
-- Capabilities: https://wesleybenoit.github.io/reddy-steady-go-website/capabilities.html
-- Service Areas: https://wesleybenoit.github.io/reddy-steady-go-website/areas/
-- Contact: https://wesleybenoit.github.io/reddy-steady-go-website/contact.html
+- Home: https://reddysteadygo.com/
+- Services: https://reddysteadygo.com/services.html
+- Capabilities: https://reddysteadygo.com/capabilities.html
+- Service Areas: https://reddysteadygo.com/areas/
+- Contact: https://reddysteadygo.com/contact.html

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 Allow: /llms.txt
-Sitemap: https://wesleybenoit.github.io/reddy-steady-go-website/sitemap.xml
+Sitemap: https://reddysteadygo.com/sitemap.xml

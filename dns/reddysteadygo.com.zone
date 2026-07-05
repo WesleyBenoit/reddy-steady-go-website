@@ -1,0 +1,36 @@
+$ORIGIN reddysteadygo.com.
+$TTL 3600
+
+@ 3600 IN SOA ns57.domaincontrol.com. dns.jomax.net. (
+  2026070501 ; serial
+  28800      ; refresh
+  7200       ; retry
+  604800     ; expire
+  3600       ; minimum
+)
+
+@ 3600 IN NS ns57.domaincontrol.com.
+@ 3600 IN NS ns58.domaincontrol.com.
+
+; Website - GitHub Pages
+@ 3600 IN A 185.199.108.153
+@ 3600 IN A 185.199.109.153
+@ 3600 IN A 185.199.110.153
+@ 3600 IN A 185.199.111.153
+www 3600 IN CNAME WesleyBenoit.github.io.
+
+; Microsoft 365 / GoDaddy email
+@ 3600 IN MX 0 reddysteadygo-com.mail.protection.outlook.com.
+@ 3600 IN TXT "NETORG18860200.onmicrosoft.com"
+@ 3600 IN TXT "v=spf1 include:secureserver.net -all"
+autodiscover 3600 IN CNAME autodiscover.outlook.com.
+msoid 3600 IN CNAME clientconfig.microsoftonline-p.net.
+selector1._domainkey 3600 IN CNAME selector1-reddysteadygo-com._domainkey.netorg18860200.k-v1.dkim.mail.microsoft.
+selector2._domainkey 3600 IN CNAME selector2-reddysteadygo-com._domainkey.netorg18860200.k-v1.dkim.mail.microsoft.
+_dmarc 3600 IN TXT "v=DMARC1; p=reject; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;"
+
+; Microsoft Teams / Skype records currently published for this domain
+lyncdiscover 3600 IN CNAME webdir.online.lync.com.
+sip 3600 IN CNAME sipdir.online.lync.com.
+_sip._tls 3600 IN SRV 100 1 443 sipdir.online.lync.com.
+_sipfederationtls._tcp 3600 IN SRV 100 1 5061 sipfed.online.lync.com.

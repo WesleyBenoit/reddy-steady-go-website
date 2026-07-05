@@ -1,21 +1,17 @@
 (function () {
   "use strict";
 
-  // TODO: replace with a real Web3Forms access key.
-  // Get one free at https://web3forms.com/ using kris@pave911.com — no signup
-  // required, the key is emailed instantly. Submissions will be delivered to
-  // whatever email address you register the key with.
-  var WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY";
+  var WEB3FORMS_ACCESS_KEY = "";
   var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+  var ESTIMATE_EMAIL = "Kris@reddysteadygo.com";
 
   document.addEventListener("DOMContentLoaded", function () {
     initPhoneFormatting();
-    initWeb3Forms();
+    initEstimateForms();
   });
 
   function initPhoneFormatting() {
-    var inputs = document.querySelectorAll("[data-phone-format]");
-    inputs.forEach(function (input) {
+    document.querySelectorAll("[data-phone-format]").forEach(function (input) {
       input.addEventListener("input", function () {
         var digits = input.value.replace(/\D/g, "").slice(0, 10);
         var formatted = digits;
@@ -31,9 +27,8 @@
     });
   }
 
-  function initWeb3Forms() {
-    var forms = document.querySelectorAll("form[data-web3forms]");
-    forms.forEach(function (form) {
+  function initEstimateForms() {
+    document.querySelectorAll("form[data-web3forms]").forEach(function (form) {
       setupForm(form);
     });
   }
@@ -49,14 +44,13 @@
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       clearFieldErrors(form);
-      if (errorBox) errorBox.classList.remove("visible");
+      hideStatus(successBox);
+      hideStatus(errorBox);
 
-      // Honeypot: Web3Forms convention is a checkbox named "botcheck".
-      // If it's checked, a bot filled it in — pretend success and stop.
       var honeypot = form.querySelector('input[name="botcheck"]');
       if (honeypot && honeypot.checked) {
         form.reset();
-        if (successBox) successBox.classList.add("visible");
+        showStatus(successBox, "Thanks. We will follow up shortly.");
         return;
       }
 
@@ -66,51 +60,106 @@
         return;
       }
 
-      if (WEB3FORMS_ACCESS_KEY.indexOf("REPLACE_WITH") === 0) {
-        showError(errorBox, "Form is not connected yet — the site owner needs to add a Web3Forms access key (see js/forms.js).");
+      if (!WEB3FORMS_ACCESS_KEY) {
+        openMailFallback(form, successBox);
         return;
       }
 
-      var formData = new FormData(form);
-      formData.set("access_key", WEB3FORMS_ACCESS_KEY);
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
-      }
-
-      fetch(WEB3FORMS_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData
-      })
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          if (data.success) {
-            form.reset();
-            if (successBox) successBox.classList.add("visible");
-          } else {
-            showError(errorBox, data.message || "Something went wrong. Please call us instead.");
-          }
-        })
-        .catch(function () {
-          showError(errorBox, "Network error — your message wasn't sent. Please call us instead.");
-        })
-        .finally(function () {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = submitLabel;
-          }
-        });
+      submitToWeb3Forms(form, submitBtn, submitLabel, successBox, errorBox);
     });
   }
 
-  function showError(errorBox, message) {
-    if (!errorBox) return;
-    errorBox.textContent = message;
-    errorBox.classList.add("visible");
+  function submitToWeb3Forms(form, submitBtn, submitLabel, successBox, errorBox) {
+    var formData = new FormData(form);
+    formData.set("access_key", WEB3FORMS_ACCESS_KEY);
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+    }
+
+    fetch(WEB3FORMS_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: formData
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.success) {
+          form.reset();
+          showStatus(successBox, "Thanks. Your message has been sent. We will follow up within one business day.");
+        } else {
+          showStatus(errorBox, data.message || "Something went wrong. Please call (402) 415-9253 instead.");
+        }
+      })
+      .catch(function () {
+        showStatus(errorBox, "Network error. Your message was not sent. Please call (402) 415-9253 instead.");
+      })
+      .finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitLabel;
+        }
+      });
+  }
+
+  function openMailFallback(form, successBox) {
+    var subject = getFieldValue(form, "subject") || "Estimate request from Reddy Steady Go website";
+    var lines = ["New estimate request", ""];
+
+    collectVisibleFields(form).forEach(function (field) {
+      lines.push(field.label + ": " + field.value);
+    });
+
+    lines.push("");
+    lines.push("Sent from reddysteadygo website form.");
+
+    var href =
+      "mailto:" +
+      encodeURIComponent(ESTIMATE_EMAIL) +
+      "?subject=" +
+      encodeURIComponent(subject) +
+      "&body=" +
+      encodeURIComponent(lines.join("\n"));
+
+    window.location.href = href;
+    showStatus(successBox, "Your email app is opening with the estimate request. Send the email to complete your request.");
+  }
+
+  function collectVisibleFields(form) {
+    var fields = [];
+    form.querySelectorAll("input, select, textarea").forEach(function (field) {
+      if (!field.name || field.type === "hidden" || field.name === "botcheck") return;
+      var value = field.value ? field.value.trim() : "";
+      if (!value) return;
+      var label = findLabelText(form, field) || field.name;
+      fields.push({ label: label.replace(/\s*\*$/, ""), value: value });
+    });
+    return fields;
+  }
+
+  function findLabelText(form, field) {
+    if (!field.id) return "";
+    var label = form.querySelector('label[for="' + field.id + '"]');
+    return label ? label.textContent.trim() : "";
+  }
+
+  function getFieldValue(form, name) {
+    var field = form.querySelector('[name="' + name + '"]');
+    return field && field.value ? field.value.trim() : "";
+  }
+
+  function showStatus(box, message) {
+    if (!box) return;
+    box.textContent = message;
+    box.classList.add("visible");
+  }
+
+  function hideStatus(box) {
+    if (!box) return;
+    box.classList.remove("visible");
   }
 
   function validateForm(form) {
