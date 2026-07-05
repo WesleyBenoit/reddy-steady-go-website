@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reddysteadygo.com/sitemap.xml
+Sitemap: https://wesleybenoit.github.io/reddy-steady-go-website/sitemap.xml

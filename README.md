@@ -10,6 +10,13 @@ Plain HTML/CSS/JS, no build step required. Pages:
 - `gallery.html` — featured case studies plus a filterable project gallery
 - `about.html` — company story, leadership, values, timeline
 - `contact.html` — contact info, hours, map, estimate request form
+- `areas/index.html` + `areas/{papillion,bellevue,la-vista,elkhorn,council-bluffs}.html` — service-area landing pages, each with unique intro copy and city-scoped LocalBusiness schema, linked from every page's footer
+
+## Local SEO
+
+- **JSON-LD on every page**: a `GeneralContractor` (LocalBusiness) block with NAP, hours, an estimated `geo` (see TODO below), and service catalog; `BreadcrumbList` on every interior page; `Service` schema for the four services on `services.html`; `FAQPage` schema on `index.html` matching the visible FAQ section; a city-scoped `GeneralContractor` block (areaServed = that city) on each `areas/*.html` page.
+- **`sitemap.xml`** lists all 12 pages; **`robots.txt`** points to it. Both use the real GitHub Pages URL (`https://wesleybenoit.github.io/reddy-steady-go-website/`) — see the canonical-domain note below.
+- **Geo coordinates are an estimate**, not a verified geocode (outbound geocoding APIs weren't reachable while building this). Every page has an HTML comment above its LocalBusiness script tag flagging this — verify the real lat/long via Google Maps (right-click the pin) or your Google Business Profile and update all 11 occurrences (`grep -rn "41.2110" .`).
 
 ## Logo &amp; imagery
 
@@ -31,12 +38,14 @@ Search the codebase for these and swap in real content:
 2. **Testimonials** — `index.html` testimonial section has 3 sample quotes marked "Placeholder Reviewer." Replace with real Yelp/Google reviews (with permission).
 3. **Gallery photos** — `gallery.html`, `services.html`, and the homepage gallery preview use the custom SVG illustrations in `assets/illustrations/` instead of real photos (see "Logo & imagery" above). Add real project photos and swap each tile's `background-image` in.
 4. **Company history / timeline** — `about.html` has a generic founding/growth/today timeline; replace with real dates and milestones.
-5. **Canonical domain** — all pages use `https://reddysteadygo.com/` as a placeholder canonical/OG URL. Update once a real domain is chosen (or point it at the GitHub Pages URL).
+5. **Canonical domain** — all pages, sitemap.xml, and robots.txt now point to the real GitHub Pages URL (`https://wesleybenoit.github.io/reddy-steady-go-website/`) instead of the never-registered `reddysteadygo.com`. If a real custom domain is set up later, do a find-and-replace for that GitHub Pages URL across all pages, `sitemap.xml`, and `robots.txt`.
 6. **Social links** — Instagram link points to `https://www.instagram.com/reddy.go/` (found via search, unverified); Facebook/Yelp footer icons are `#` placeholders.
 7. **By-the-numbers stats** — `index.html` stats bar (years in business, projects completed, sq. ft. poured, safety record) is placeholder; replace with real figures.
 8. **Certification badges** — Bonded / OSHA 10-30 / EPA SWPPP / ADA badges on `index.html` and `capabilities.html` are marked with `*` because certification status is unverified. Only keep a badge live once the certification is actually confirmed.
 9. **Capability statement data** — `capabilities.html` uses real, standard NAICS codes (238110, 238140, 237310, 238990) but placeholder UEI, CAGE code, and bonding capacity. Register in SAM.gov and fill in real values before using this page for government/prime-contractor submissions.
 10. **Leadership section** — `about.html` currently lists only Kris Reddy; add real field/office staff as the team grows.
+11. **Geo coordinates** — every page's LocalBusiness JSON-LD uses an estimated lat/long for 13811 L Street (see "Local SEO" above); verify and correct.
+12. **Web3Forms access key** — forms won't deliver email until a real key replaces the placeholder in `js/forms.js` (and the hidden inputs in `contact.html`/`index.html`); see "Contact form" below.
 
 ## Contact form (Web3Forms)
 
