@@ -10,7 +10,23 @@
     initGalleryFilters();
     initFooterYear();
     initScrollReveal();
+    initLazyMaps();
   });
+
+  function initLazyMaps() {
+    document.querySelectorAll("[data-map-embed]").forEach(function (container) {
+      var button = container.querySelector(".map-embed-placeholder");
+      if (!button) return;
+      button.addEventListener("click", function () {
+        var iframe = document.createElement("iframe");
+        iframe.src = container.getAttribute("data-map-src");
+        iframe.title = container.getAttribute("data-map-title") || "Map";
+        iframe.loading = "lazy";
+        container.innerHTML = "";
+        container.appendChild(iframe);
+      });
+    });
+  }
 
   function initScrollReveal() {
     if (!("IntersectionObserver" in window)) return;

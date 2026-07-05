@@ -28,6 +28,15 @@ Every field in `js/data.js` is currently a placeholder — see the TODO comments
 - **`sitemap.xml`** lists all 12 pages; **`robots.txt`** points to it. Both use the real GitHub Pages URL (`https://wesleybenoit.github.io/reddy-steady-go-website/`) — see the canonical-domain note below.
 - **Geo coordinates are an estimate**, not a verified geocode (outbound geocoding APIs weren't reachable while building this). Every page has an HTML comment above its LocalBusiness script tag flagging this — verify the real lat/long via Google Maps (right-click the pin) or your Google Business Profile and update all 11 occurrences (`grep -rn "41.2110" .`).
 
+## Performance
+
+- **Images**: all imagery on this site is SVG (vector), not raster photos, so there's nothing to convert to WebP — the logo and illustrations are already as small and scalable as they'll get. If real photography is added later (see "Logo & imagery"), convert those specific files to WebP with explicit `width`/`height` and `loading="lazy"` on anything below the fold.
+- **Scripts**: `js/data.js`, `js/forms.js`, and `js/main.js` all load with the `defer` attribute.
+- **Google Maps embeds** (homepage service-area section, contact page) no longer load an iframe on page load. They show a lightweight click-to-load placeholder (`js/main.js` `initLazyMaps()`), and only fetch the actual Google Maps iframe once a visitor clicks it.
+- **Preload**: `assets/logo-icon.svg` is preloaded on every page, since it's the only above-the-fold image (there's no separate hero photo — the hero is CSS/text).
+- **Critical CSS**: a small hand-picked subset of the stylesheet (reset, body, `.container`, topbar/header/nav) is inlined in `<head>` on every page so there's no flash of unstyled content while `css/styles.css` finishes loading. This is a lightweight approximation, not full build-time critical-CSS extraction (this site has no build step) — if `css/styles.css` changes in a way that affects the topbar/header/nav, keep this inline block (search for "Critical above-the-fold styles") roughly in sync by hand.
+- **Lighthouse**: a formal 95+ mobile score should be verified via Chrome DevTools or PageSpeed Insights against the live GitHub Pages URL once deployed — this environment's outbound network restrictions block the Google Fonts domain, so a Lighthouse run from here wouldn't reflect real-world conditions.
+
 ## Icons &amp; motion
 
 - `assets/icons.svg` is a hand-drawn SVG sprite (`<symbol>` defs, referenced via `<use href="assets/icons.svg#icon-name">`) that replaces every emoji glyph previously used for icons — phone, star, concrete/masonry/paving/wrench, lock, dollar, home, check, shield, clipboard, briefcase, building, landmark, clock, chat. All five certification badges intentionally reuse the same `shield` icon (differentiated by label text), matching real trust-badge conventions.

@@ -7,9 +7,25 @@
 <meta name="description" content="Reddy Steady Go LLC provides concrete, masonry, and paving services to Bellevue, NE homeowners and businesses. Free estimates: (402) 415-9253." />
 <link rel="canonical" href="https://wesleybenoit.github.io/reddy-steady-go-website/areas/bellevue.html" />
 <link rel="icon" type="image/svg+xml" href="../assets/logo-icon.svg" />
+<link rel="preload" as="image" href="../assets/logo-icon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+/* Critical above-the-fold styles, inlined to avoid a flash of unstyled
+   content before css/styles.css finishes loading. This duplicates a small
+   subset of that file and is intentionally kept in sync by hand -- see
+   the "Performance" section of README.md. */
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#23272a;background:#fff;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.container{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+.topbar{background:#1e2224;color:#e5e3df;font-size:.85rem}
+.topbar .container{display:flex;align-items:center;justify-content:space-between;padding-top:8px;padding-bottom:8px;gap:16px;flex-wrap:wrap}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 8px rgba(30,34,36,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.4rem;color:#1e2224}
+</style>
 <link rel="stylesheet" href="../css/styles.css" />
 <!-- TODO: geo coordinates below are an ESTIMATE for 13811 L Street, Omaha, NE 68137,
      not verified against a geocoder. Confirm the exact latitude/longitude via
@@ -84,7 +100,7 @@
 <header class="site-header">
   <nav class="nav container">
     <a href="../index.html" class="brand">
-      <span class="brand-mark" aria-hidden="true"><img src="../assets/logo-icon.svg" alt="" /></span>
+      <span class="brand-mark" aria-hidden="true"><img src="../assets/logo-icon.svg" alt="" width="44" height="44" /></span>
       <span class="brand-text">Reddy Steady Go<small>Concrete &middot; Masonry &middot; Paving</small></span>
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
@@ -187,7 +203,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand" style="color:white;">
-          <span class="brand-mark" aria-hidden="true"><img src="../assets/logo-icon.svg" alt="" /></span>
+          <span class="brand-mark" aria-hidden="true"><img src="../assets/logo-icon.svg" alt="" width="44" height="44" /></span>
           <span class="brand-text">Reddy Steady Go<small style="color:#9aa0a3;">Concrete &middot; Masonry &middot; Paving</small></span>
         </div>
         <p>Omaha's trusted concrete, masonry, and commercial paving contractor. Licensed, insured, and locally owned.</p>
@@ -246,8 +262,8 @@
   <a href="../contact.html" class="sticky-call-secondary">Get Estimate</a>
 </div>
 
-<script src="../js/data.js"></script>
-<script src="../js/forms.js"></script>
-<script src="../js/main.js"></script>
+<script src="../js/data.js" defer></script>
+<script src="../js/forms.js" defer></script>
+<script src="../js/main.js" defer></script>
 </body>
 </html>
