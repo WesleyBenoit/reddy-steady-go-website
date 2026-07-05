@@ -4,10 +4,11 @@ Enterprise-style marketing site for **Reddy Steady Go LLC**, a concrete, masonry
 
 Plain HTML/CSS/JS, no build step required. Pages:
 
-- `index.html` — home
+- `index.html` — home, with a by-the-numbers stats bar, certification badges, and a capabilities/government-contracting teaser
 - `services.html` — concrete, masonry, commercial paving, repair/mudjacking
-- `gallery.html` — project gallery with filterable placeholder tiles
-- `about.html` — company story, values, timeline
+- `capabilities.html` — capability statement: core competencies, differentiators, NAICS/UEI/CAGE/bonding data, certifications, core markets (residential/commercial/municipal)
+- `gallery.html` — featured case studies plus a filterable project gallery
+- `about.html` — company story, leadership, values, timeline
 - `contact.html` — contact info, hours, map, estimate request form
 
 ## Confirmed business info
@@ -27,6 +28,10 @@ Search the codebase for these and swap in real content:
 4. **Company history / timeline** — `about.html` has a generic founding/growth/today timeline; replace with real dates and milestones.
 5. **Canonical domain** — all pages use `https://reddysteadygo.com/` as a placeholder canonical/OG URL. Update once a real domain is chosen (or point it at the GitHub Pages URL).
 6. **Social links** — Instagram link points to `https://www.instagram.com/reddy.go/` (found via search, unverified); Facebook/Yelp footer icons are `#` placeholders.
+7. **By-the-numbers stats** — `index.html` stats bar (years in business, projects completed, sq. ft. poured, safety record) is placeholder; replace with real figures.
+8. **Certification badges** — Bonded / OSHA 10-30 / EPA SWPPP / ADA badges on `index.html` and `capabilities.html` are marked with `*` because certification status is unverified. Only keep a badge live once the certification is actually confirmed.
+9. **Capability statement data** — `capabilities.html` uses real, standard NAICS codes (238110, 238140, 237310, 238990) but placeholder UEI, CAGE code, and bonding capacity. Register in SAM.gov and fill in real values before using this page for government/prime-contractor submissions.
+10. **Leadership section** — `about.html` currently lists only Kris Reddy; add real field/office staff as the team grows.
 
 ## Contact form
 

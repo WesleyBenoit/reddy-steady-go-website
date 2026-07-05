@@ -15,8 +15,16 @@
   --color-amber: #e0a233;
   --color-white: #ffffff;
 
-  --font-display: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Institutional / capability-statement accents */
+  --color-navy: #0f2138;
+  --color-navy-soft: #1c3252;
+  --color-navy-deep: #0a1626;
+  --color-gold: #b8923f;
+  --color-gold-soft: #d9bd7c;
+
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -978,6 +986,229 @@ section:not(.section-dark) .feature-icon {
   margin: 0 0 24px;
 }
 
+/* ---------- Stats bar ---------- */
+.stats-bar {
+  background: var(--color-navy-deep);
+  color: var(--color-white);
+  border-top: 1px solid rgba(217,189,124,0.25);
+  border-bottom: 1px solid rgba(217,189,124,0.25);
+}
+.stats-bar .container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.stat {
+  text-align: center;
+  border-left: 1px solid rgba(255,255,255,0.12);
+}
+.stat:first-child { border-left: none; }
+.stat strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  color: var(--color-gold-soft);
+  letter-spacing: 0.01em;
+}
+.stat span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b7bbbd;
+}
+
+/* ---------- Credential badges ---------- */
+.credentials-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+.credential-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--color-white);
+  border: 1px solid var(--color-concrete-dark);
+  font-weight: 700;
+  font-size: 0.86rem;
+  color: var(--color-charcoal);
+  box-shadow: var(--shadow-sm);
+}
+.credential-badge .seal {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
+  color: var(--color-navy-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* ---------- Capability / government section ---------- */
+.section-capability {
+  background: var(--color-navy);
+  color: #cfd6df;
+  position: relative;
+  overflow: hidden;
+}
+.section-capability::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(217,189,124,0.05) 0, rgba(217,189,124,0.05) 1px, transparent 1px, transparent 64px);
+  pointer-events: none;
+}
+.section-capability .container { position: relative; }
+.section-capability h2, .section-capability h3 { color: var(--color-white); }
+.section-capability .eyebrow { color: var(--color-gold-soft); }
+.section-capability .section-head p { color: #a9b2bd; }
+.capability-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+.capability-list { display: grid; gap: 14px; }
+.capability-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.capability-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.capability-list li .mark {
+  color: var(--color-gold-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.capability-card {
+  background: var(--color-navy-soft);
+  border: 1px solid rgba(217,189,124,0.3);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+.capability-card h4 {
+  color: var(--color-white);
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.data-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  vertical-align: top;
+}
+.data-table td:first-child {
+  color: #a9b2bd;
+  width: 46%;
+}
+.data-table td:last-child {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-white);
+  text-align: right;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ---------- Leadership ---------- */
+.leadership-card {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(30,34,36,0.06);
+}
+.leadership-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #43484b, #17191b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.leadership-card h3 { margin-bottom: 2px; }
+.leadership-title {
+  color: var(--color-red);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ---------- Case studies ---------- */
+.case-study-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(30,34,36,0.06);
+  display: grid;
+  grid-template-rows: 200px auto;
+}
+.case-study-media {
+  position: relative;
+}
+.case-study-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--tile-bg, linear-gradient(135deg, #55595b, #2a2f32));
+}
+.case-study-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+  color: var(--color-charcoal);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.case-study-body { padding: 26px 26px 28px; }
+.case-study-body h3 { font-size: 1.15rem; margin-bottom: 12px; }
+.case-study-row { display: flex; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; }
+.case-study-row strong { flex-shrink: 0; width: 84px; color: var(--color-red); font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; padding-top: 2px; }
+.case-study-row span { color: var(--color-muted); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .hero .container { grid-template-columns: 1fr; }
@@ -990,6 +1221,10 @@ section:not(.section-dark) .feature-icon {
   .contact-grid { grid-template-columns: 1fr; }
   .value-grid { grid-template-columns: 1fr; }
   .area-list { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+  .stat:nth-child(3) { border-left: none; }
+  .capability-grid { grid-template-columns: 1fr; }
+  .leadership-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
 }
 
 @media (max-width: 720px) {
@@ -1016,4 +1251,7 @@ section:not(.section-dark) .feature-icon {
   .cta-banner { flex-direction: column; text-align: center; }
   .hero-stats { grid-template-columns: repeat(3, auto); gap: 18px; }
   .area-list { grid-template-columns: 1fr; }
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 16px; }
+  .stat:first-child, .stat:nth-child(2) { border-top: none; padding-top: 0; }
 }
