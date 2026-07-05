@@ -6,7 +6,6 @@
     initTestimonials();
     initGalleryFilters();
     initFooterYear();
-    initContactForm();
   });
 
   function initNav() {
@@ -84,15 +83,5 @@
   function initFooterYear() {
     var el = document.getElementById("year");
     if (el) el.textContent = new Date().getFullYear();
-  }
-
-  function initContactForm() {
-    var form = document.getElementById("contact-form");
-    var success = document.getElementById("form-success");
-    if (!form || !success) return;
-
-    form.addEventListener("submit", function () {
-      success.classList.add("visible");
-    });
   }
 })();

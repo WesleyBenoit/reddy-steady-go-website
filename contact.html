@@ -110,20 +110,31 @@
         <div class="form-card">
           <h3>Send Us A Message</h3>
           <p style="color:var(--color-muted);margin-bottom:24px;">Fields marked * are required. We typically respond within one business day.</p>
-          <div class="form-success" id="form-success">Thanks &mdash; your message has been prepared. Please send it from your email app to complete your request.</div>
-          <form id="contact-form" action="mailto:kris@pave911.com" method="post" enctype="text/plain">
+          <div class="form-success" id="form-success" role="status">Thanks &mdash; your message has been sent. We'll follow up within one business day.</div>
+          <div class="form-error" id="form-error" role="alert"></div>
+          <form id="contact-form" data-web3forms data-success-target="form-success" data-error-target="form-error">
+            <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="subject" value="New estimate request from reddysteadygo website" />
+            <input type="hidden" name="from_name" value="Reddy Steady Go Website" />
+            <label class="honeypot-field" aria-hidden="true">
+              Leave this field blank
+              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+            </label>
             <div class="form-grid">
               <div>
                 <label for="name">Full Name *</label>
                 <input id="name" name="Name" type="text" required />
+                <span class="field-error" id="name-error"></span>
               </div>
               <div>
                 <label for="phone">Phone *</label>
-                <input id="phone" name="Phone" type="tel" required />
+                <input id="phone" name="Phone" type="tel" inputmode="tel" placeholder="(402) 555-0123" data-phone-format required />
+                <span class="field-error" id="phone-error"></span>
               </div>
               <div class="full">
                 <label for="email">Email</label>
                 <input id="email" name="Email" type="email" />
+                <span class="field-error" id="email-error"></span>
               </div>
               <div class="full">
                 <label for="address">Project Address</label>
@@ -139,14 +150,16 @@
                   <option>Concrete Repair / Mudjacking</option>
                   <option>Other</option>
                 </select>
+                <span class="field-error" id="service-error"></span>
               </div>
               <div class="full">
                 <label for="message">Project Details *</label>
                 <textarea id="message" name="Message" rows="5" required></textarea>
+                <span class="field-error" id="message-error"></span>
               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px;">Request Free Estimate</button>
-            <p class="form-note">This form opens your email client to send your request directly to kris@pave911.com. For faster response, call (402) 415-9253.</p>
+            <p class="form-note">For faster response, call (402) 415-9253.</p>
           </form>
         </div>
       </div>
@@ -203,6 +216,12 @@
   </div>
 </footer>
 
+<div class="sticky-call-bar">
+  <a href="tel:+14024159253" class="sticky-call-primary">&#9742; Call Now</a>
+  <a href="#contact-form" class="sticky-call-secondary">Get Estimate</a>
+</div>
+
+<script src="js/forms.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

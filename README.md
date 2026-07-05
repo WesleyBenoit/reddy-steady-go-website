@@ -38,9 +38,24 @@ Search the codebase for these and swap in real content:
 9. **Capability statement data** — `capabilities.html` uses real, standard NAICS codes (238110, 238140, 237310, 238990) but placeholder UEI, CAGE code, and bonding capacity. Register in SAM.gov and fill in real values before using this page for government/prime-contractor submissions.
 10. **Leadership section** — `about.html` currently lists only Kris Reddy; add real field/office staff as the team grows.
 
-## Contact form
+## Contact form (Web3Forms)
 
-The estimate request forms use `mailto:` submission (opens the visitor's email client) so the site works with zero backend. For a native in-page submission, wire the `<form>` in `contact.html` and the hero form in `index.html` to a form service (e.g. Formspree, Netlify Forms) or a small serverless endpoint.
+Both the contact page form and the homepage hero form submit via [Web3Forms](https://web3forms.com/) — a free form backend that emails submissions to whatever address you register, with no server of your own required. Logic lives in `js/forms.js`.
+
+**Required setup before the forms will work:**
+
+1. Go to https://web3forms.com/ and enter `kris@pave911.com`. An access key is emailed instantly — no account signup needed.
+2. Open `js/forms.js` and replace `REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY` (top of the file) with that key.
+3. Also replace the same placeholder string in the hidden `access_key` input in both `contact.html` and `index.html` (belt-and-suspenders — the JS sets it programmatically, but keeping the HTML in sync avoids confusion if the markup is ever submitted without JS).
+4. Commit and push. Submit a test message from the live site and confirm it arrives by email (see verification steps below).
+
+Until the real key is in place, submitting either form shows a visible "Form is not connected yet" message instead of silently failing.
+
+**Built in:**
+- Client-side validation (required fields, email format, 10-digit phone) with inline error messages
+- A hidden honeypot checkbox (`name="botcheck"`) that silently no-ops the submission if a bot fills it in
+- Live phone formatting to `(XXX) XXX-XXXX` as you type
+- Success/error banners, with the submit button disabled and showing "Sending…" during the request
 
 ## Deploying
 

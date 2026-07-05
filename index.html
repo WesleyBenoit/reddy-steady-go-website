@@ -97,14 +97,25 @@
       <div class="hero-card">
         <h3>Request a Free Estimate</h3>
         <p>Tell us about your project and we'll get back to you fast.</p>
-        <form action="mailto:kris@pave911.com" method="post" enctype="text/plain">
+        <div class="form-success" id="hero-form-success" role="status">Thanks &mdash; we'll call you back shortly.</div>
+        <div class="form-error" id="hero-form-error" role="alert"></div>
+        <form id="hero-form" data-web3forms data-success-target="hero-form-success" data-error-target="hero-form-error">
+          <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY" />
+          <input type="hidden" name="subject" value="New quick-quote request from reddysteadygo website" />
+          <input type="hidden" name="from_name" value="Reddy Steady Go Website" />
+          <label class="honeypot-field" aria-hidden="true">
+            Leave this field blank
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+          </label>
           <div class="form-row">
             <label for="hero-name">Name</label>
             <input id="hero-name" name="Name" type="text" required />
+            <span class="field-error" id="hero-name-error"></span>
           </div>
           <div class="form-row">
             <label for="hero-phone">Phone</label>
-            <input id="hero-phone" name="Phone" type="tel" required />
+            <input id="hero-phone" name="Phone" type="tel" inputmode="tel" placeholder="(402) 555-0123" data-phone-format required />
+            <span class="field-error" id="hero-phone-error"></span>
           </div>
           <div class="form-row">
             <label for="hero-service">Service Needed</label>
@@ -429,6 +440,12 @@
   </div>
 </footer>
 
+<div class="sticky-call-bar">
+  <a href="tel:+14024159253" class="sticky-call-primary">&#9742; Call Now</a>
+  <a href="contact.html" class="sticky-call-secondary">Get Estimate</a>
+</div>
+
+<script src="js/forms.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

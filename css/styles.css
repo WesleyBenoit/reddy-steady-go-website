@@ -865,6 +865,78 @@ section:not(.section-dark) .feature-icon {
 .form-success.visible {
   display: block;
 }
+.form-error {
+  display: none;
+  background: #fbe9e7;
+  color: #8a2a1f;
+  border: 1px solid #f0c2ba;
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.form-error.visible {
+  display: block;
+}
+.field-invalid {
+  border-color: var(--color-red) !important;
+  background: #fdf3f2;
+}
+.field-error {
+  display: none;
+  color: var(--color-red);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+.field-error.visible {
+  display: block;
+}
+.honeypot-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Sticky mobile call bar ---------- */
+.sticky-call-bar {
+  display: none;
+}
+@media (max-width: 720px) {
+  .sticky-call-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.18);
+  }
+  .sticky-call-bar a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .sticky-call-bar a.sticky-call-primary {
+    background: var(--color-red);
+    color: var(--color-white);
+  }
+  .sticky-call-bar a.sticky-call-secondary {
+    background: var(--color-charcoal);
+    color: var(--color-white);
+  }
+  body {
+    padding-bottom: 64px;
+  }
+}
 
 /* ---------- About page ---------- */
 .about-hero {
