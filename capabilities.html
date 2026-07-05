@@ -199,12 +199,8 @@
         <h2>Compliance We Maintain</h2>
         <p>Confirm current status of each item before publishing or submitting to a procurement office.</p>
       </div>
-      <div class="credentials-row">
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#10003;</span>Licensed &amp; Insured</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9877;</span>Bonded Contractor*</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9878;</span>OSHA 10/30 Certified*</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9851;</span>EPA SWPPP Compliant*</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9878;</span>ADA Design Familiarity*</span>
+      <div class="credentials-row" data-certifications>
+        <!-- Populated from js/data.js (window.SITE_DATA.certifications) by js/main.js -->
       </div>
     </div>
   </section>
@@ -315,6 +311,7 @@
   <a href="contact.html" class="sticky-call-secondary">Get Estimate</a>
 </div>
 
+<script src="js/data.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/main.js"></script>
 </body>

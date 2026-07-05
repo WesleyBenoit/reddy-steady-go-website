@@ -3,10 +3,72 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initNav();
+    renderStats();
+    renderCertifications();
+    renderTestimonials();
     initTestimonials();
     initGalleryFilters();
     initFooterYear();
   });
+
+  function getSiteData() {
+    return window.SITE_DATA || { stats: [], testimonials: [], certifications: [] };
+  }
+
+  function renderStats() {
+    var container = document.getElementById("stats-bar-data");
+    var data = getSiteData().stats;
+    if (!container || !data.length) return;
+    container.innerHTML = data
+      .map(function (stat) {
+        return (
+          '<div class="stat"><strong>' + stat.value + "</strong><span>" + stat.label + "</span></div>"
+        );
+      })
+      .join("");
+  }
+
+  function renderCertifications() {
+    var containers = document.querySelectorAll("[data-certifications]");
+    var data = getSiteData().certifications;
+    if (!containers.length || !data.length) return;
+    var html = data
+      .map(function (cert) {
+        var label = cert.verified ? cert.label : cert.label + "*";
+        return (
+          '<span class="credential-badge"><span class="seal" aria-hidden="true">' +
+          cert.icon +
+          "</span>" +
+          label +
+          "</span>"
+        );
+      })
+      .join("");
+    containers.forEach(function (container) {
+      container.innerHTML = html;
+    });
+  }
+
+  function renderTestimonials() {
+    var container = document.getElementById("testimonial-track");
+    var data = getSiteData().testimonials;
+    if (!container || !data.length) return;
+    container.innerHTML = data
+      .map(function (t, i) {
+        return (
+          '<div class="testimonial' +
+          (i === 0 ? " active" : "") +
+          '"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;' +
+          t.quote +
+          '&rdquo;</blockquote><cite>' +
+          t.name +
+          " <span>" +
+          t.context +
+          "</span></cite></div>"
+        );
+      })
+      .join("");
+  }
 
   function initNav() {
     var toggle = document.querySelector(".nav-toggle");

@@ -12,6 +12,16 @@ Plain HTML/CSS/JS, no build step required. Pages:
 - `contact.html` — contact info, hours, map, estimate request form
 - `areas/index.html` + `areas/{papillion,bellevue,la-vista,elkhorn,council-bluffs}.html` — service-area landing pages, each with unique intro copy and city-scoped LocalBusiness schema, linked from every page's footer
 
+## Site configuration (`js/data.js`)
+
+Stats, testimonials, and certification badges are no longer hardcoded in HTML — they're rendered at runtime from `window.SITE_DATA` in `js/data.js`, by `renderStats()` / `renderTestimonials()` / `renderCertifications()` in `js/main.js`. Update numbers in one file and they change everywhere they appear:
+
+- **`stats`** — the four figures in the homepage stats bar (years experience, projects completed, sq. ft., safety incidents).
+- **`testimonials`** — the homepage review carousel. Each entry is `{ quote, name, context }`.
+- **`certifications`** — the badge row on both the homepage and `capabilities.html`. Each entry has a `verified` boolean; anything `false` renders with a trailing `*` (matching the "confirm before publishing" note next to it). Set `verified: true` only once you've actually confirmed that credential.
+
+Every field in `js/data.js` is currently a placeholder — see the TODO comments in that file.
+
 ## Local SEO
 
 - **JSON-LD on every page**: a `GeneralContractor` (LocalBusiness) block with NAP, hours, an estimated `geo` (see TODO below), and service catalog; `BreadcrumbList` on every interior page; `Service` schema for the four services on `services.html`; `FAQPage` schema on `index.html` matching the visible FAQ section; a city-scoped `GeneralContractor` block (areaServed = that city) on each `areas/*.html` page.
@@ -34,14 +44,14 @@ Plain HTML/CSS/JS, no build step required. Pages:
 
 Search the codebase for these and swap in real content:
 
-1. **Business hours** — `index.html` topbar, `contact.html` hours table (currently Mon–Fri 7–5, placeholder).
-2. **Testimonials** — `index.html` testimonial section has 3 sample quotes marked "Placeholder Reviewer." Replace with real Yelp/Google reviews (with permission).
+1. **Business hours** — `index.html` topbar (and every other page's topbar), `contact.html` hours table, and the `openingHoursSpecification` in every page's LocalBusiness JSON-LD all currently show Mon–Fri 7–5 as a placeholder. These are static per-page HTML/JSON-LD, not yet wired to `js/data.js` — update by find-and-replace across pages once real hours are confirmed (Saturday "by appointment" and Sunday "closed" aren't representable in strict `openingHoursSpecification` and are simply omitted from the schema).
+2. **Testimonials** — 3 sample quotes marked "Placeholder Reviewer" in `js/data.js` (`SITE_DATA.testimonials`). Replace with real Yelp/Google reviews (with permission) — one edit, updates the homepage carousel automatically.
 3. **Gallery photos** — `gallery.html`, `services.html`, and the homepage gallery preview use the custom SVG illustrations in `assets/illustrations/` instead of real photos (see "Logo & imagery" above). Add real project photos and swap each tile's `background-image` in.
 4. **Company history / timeline** — `about.html` has a generic founding/growth/today timeline; replace with real dates and milestones.
 5. **Canonical domain** — all pages, sitemap.xml, and robots.txt now point to the real GitHub Pages URL (`https://wesleybenoit.github.io/reddy-steady-go-website/`) instead of the never-registered `reddysteadygo.com`. If a real custom domain is set up later, do a find-and-replace for that GitHub Pages URL across all pages, `sitemap.xml`, and `robots.txt`.
 6. **Social links** — Instagram link points to `https://www.instagram.com/reddy.go/` (found via search, unverified); Facebook/Yelp footer icons are `#` placeholders.
-7. **By-the-numbers stats** — `index.html` stats bar (years in business, projects completed, sq. ft. poured, safety record) is placeholder; replace with real figures.
-8. **Certification badges** — Bonded / OSHA 10-30 / EPA SWPPP / ADA badges on `index.html` and `capabilities.html` are marked with `*` because certification status is unverified. Only keep a badge live once the certification is actually confirmed.
+7. **By-the-numbers stats** — homepage stats bar (years in business, projects completed, sq. ft. poured, safety record) in `js/data.js` (`SITE_DATA.stats`) is placeholder; replace with real figures.
+8. **Certification badges** — Bonded / OSHA 10-30 / EPA SWPPP / ADA badges in `js/data.js` (`SITE_DATA.certifications`) are marked `verified: false`, which renders them with a trailing `*` on both `index.html` and `capabilities.html`. Only flip a badge to `verified: true` once that certification is actually confirmed.
 9. **Capability statement data** — `capabilities.html` uses real, standard NAICS codes (238110, 238140, 237310, 238990) but placeholder UEI, CAGE code, and bonding capacity. Register in SAM.gov and fill in real values before using this page for government/prime-contractor submissions.
 10. **Leadership section** — `about.html` currently lists only Kris Reddy; add real field/office staff as the team grows.
 11. **Geo coordinates** — every page's LocalBusiness JSON-LD uses an estimated lat/long for 13811 L Street (see "Local SEO" above); verify and correct.

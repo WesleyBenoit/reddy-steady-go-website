@@ -209,30 +209,15 @@
   </section>
 
   <section class="stats-bar">
-    <div class="container">
-      <div class="stat">
-        <strong>20+</strong>
-        <span>Years Combined Experience</span>
-      </div>
-      <div class="stat">
-        <strong>500+</strong>
-        <span>Projects Completed</span>
-      </div>
-      <div class="stat">
-        <strong>2M+</strong>
-        <span>Sq. Ft. Poured &amp; Paved</span>
-      </div>
-      <div class="stat">
-        <strong>0</strong>
-        <span>Lost-Time Safety Incidents</span>
-      </div>
+    <div class="container" id="stats-bar-data">
+      <!-- Populated from js/data.js (window.SITE_DATA.stats) by js/main.js -->
     </div>
   </section>
 
   <section>
     <div class="container">
       <div class="placeholder-note" style="max-width:760px;margin:0 auto 24px;text-align:center;">
-        The figures above are placeholder targets &mdash; swap in Reddy Steady Go's real numbers before launch.
+        The figures above are placeholder targets &mdash; edit <code>SITE_DATA.stats</code> in <code>js/data.js</code> to swap in Reddy Steady Go's real numbers before launch.
       </div>
       <div class="section-head">
         <span class="eyebrow">What We Do</span>
@@ -305,11 +290,8 @@
           </div>
         </div>
       </div>
-      <div class="credentials-row">
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#10003;</span>Licensed &amp; Insured</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9877;</span>Bonded Contractor*</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9878;</span>OSHA 10/30 Certified*</span>
-        <span class="credential-badge"><span class="seal" aria-hidden="true">&#9851;</span>EPA SWPPP Compliant*</span>
+      <div class="credentials-row" data-certifications>
+        <!-- Populated from js/data.js (window.SITE_DATA.certifications) by js/main.js -->
       </div>
       <p style="text-align:center;color:#8b9092;font-size:0.78rem;margin-top:14px;">*Confirm current certification status before publishing &mdash; see <a href="capabilities.html" style="text-decoration:underline;">Capabilities</a> for details.</p>
     </div>
@@ -372,24 +354,10 @@
         <h2>What Omaha Says About Us</h2>
       </div>
       <div class="placeholder-note" style="max-width:760px;margin:0 auto 24px;">
-        Sample review layout below &mdash; swap in real customer quotes from Yelp/Google once available.
+        Sample review layout below &mdash; edit <code>SITE_DATA.testimonials</code> in <code>js/data.js</code> to swap in real customer quotes from Yelp/Google once available.
       </div>
-      <div class="testimonial-track">
-        <div class="testimonial active">
-          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"Reddy Steady Go repaved our lot ahead of schedule and the crew kept the site clean the whole time. Would hire again."</blockquote>
-          <cite>Placeholder Reviewer <span>Commercial customer, Omaha</span></cite>
-        </div>
-        <div class="testimonial">
-          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"Our new driveway looks fantastic and held up perfectly through the winter. Fair price and great communication."</blockquote>
-          <cite>Placeholder Reviewer <span>Residential customer, Papillion</span></cite>
-        </div>
-        <div class="testimonial">
-          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"They rebuilt our retaining wall and it's stronger and better looking than the original. Highly recommend."</blockquote>
-          <cite>Placeholder Reviewer <span>Residential customer, Bellevue</span></cite>
-        </div>
+      <div class="testimonial-track" id="testimonial-track">
+        <!-- Populated from js/data.js (window.SITE_DATA.testimonials) by js/main.js -->
       </div>
       <div class="testimonial-dots" role="tablist" aria-label="Testimonials"></div>
     </div>
@@ -562,6 +530,7 @@
   <a href="contact.html" class="sticky-call-secondary">Get Estimate</a>
 </div>
 
+<script src="js/data.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/main.js"></script>
 </body>
