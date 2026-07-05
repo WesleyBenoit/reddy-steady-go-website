@@ -28,6 +28,11 @@ Every field in `js/data.js` is currently a placeholder — see the TODO comments
 - **`sitemap.xml`** lists all 12 pages; **`robots.txt`** points to it. Both use the real GitHub Pages URL (`https://wesleybenoit.github.io/reddy-steady-go-website/`) — see the canonical-domain note below.
 - **Geo coordinates are an estimate**, not a verified geocode (outbound geocoding APIs weren't reachable while building this). Every page has an HTML comment above its LocalBusiness script tag flagging this — verify the real lat/long via Google Maps (right-click the pin) or your Google Business Profile and update all 11 occurrences (`grep -rn "41.2110" .`).
 
+## Icons &amp; motion
+
+- `assets/icons.svg` is a hand-drawn SVG sprite (`<symbol>` defs, referenced via `<use href="assets/icons.svg#icon-name">`) that replaces every emoji glyph previously used for icons — phone, star, concrete/masonry/paving/wrench, lock, dollar, home, check, shield, clipboard, briefcase, building, landmark, clock, chat. All five certification badges intentionally reuse the same `shield` icon (differentiated by label text), matching real trust-badge conventions.
+- `js/main.js`'s `initScrollReveal()` fades/slides cards, stats, badges, and similar blocks into view on scroll via `IntersectionObserver`, and is a no-op if the browser has no `IntersectionObserver` support or the visitor has `prefers-reduced-motion: reduce` set. Gallery tiles and individual testimonial slides are deliberately excluded since other scripts show/hide them via `display`, which doesn't retrigger the observer.
+
 ## Logo &amp; imagery
 
 - `assets/logo-icon.svg` — custom vector mark (trowel + level bubble in a navy/gold seal) used as the header/footer badge and the browser favicon on every page.

@@ -9,7 +9,41 @@
     initTestimonials();
     initGalleryFilters();
     initFooterYear();
+    initScrollReveal();
   });
+
+  function initScrollReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Excludes .gallery-tile and individual .testimonial slides deliberately:
+    // both get shown/hidden via style.display by other scripts (filters,
+    // the testimonial rotator), and IntersectionObserver won't re-fire just
+    // because display changes, so a tile revealed after being filtered back
+    // in could get stuck at opacity 0.
+    var targets = document.querySelectorAll(
+      ".card, .feature, .step, .case-study-card, .capability-card, .leadership-card, .faq-item, .stat, .credential-badge, .testimonial-track"
+    );
+    if (!targets.length) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    targets.forEach(function (el, i) {
+      el.classList.add("reveal");
+      el.style.transitionDelay = Math.min(i % 4, 3) * 60 + "ms";
+      observer.observe(el);
+    });
+  }
 
   function getSiteData() {
     return window.SITE_DATA || { stats: [], testimonials: [], certifications: [] };
@@ -36,9 +70,9 @@
       .map(function (cert) {
         var label = cert.verified ? cert.label : cert.label + "*";
         return (
-          '<span class="credential-badge"><span class="seal" aria-hidden="true">' +
+          '<span class="credential-badge"><span class="seal" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#icon-' +
           cert.icon +
-          "</span>" +
+          '"></use></svg></span>' +
           label +
           "</span>"
         );

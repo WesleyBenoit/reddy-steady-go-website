@@ -46,11 +46,11 @@ window.SITE_DATA = {
   // confirmed. Unverified badges render with a trailing "*" and are listed in
   // the README's placeholder audit — don't let one go live unverified.
   certifications: [
-    { label: "Licensed &amp; Insured", icon: "&#10003;", verified: true },
-    { label: "Bonded Contractor", icon: "&#9877;", verified: false },
-    { label: "OSHA 10/30 Certified", icon: "&#9878;", verified: false },
-    { label: "EPA SWPPP Compliant", icon: "&#9851;", verified: false },
-    { label: "ADA Design Familiarity", icon: "&#9878;", verified: false }
+    { label: "Licensed &amp; Insured", icon: "shield", verified: true },
+    { label: "Bonded Contractor", icon: "shield", verified: false },
+    { label: "OSHA 10/30 Certified", icon: "shield", verified: false },
+    { label: "EPA SWPPP Compliant", icon: "shield", verified: false },
+    { label: "ADA Design Familiarity", icon: "shield", verified: false }
   ],
 
   // TODO: confirm and replace with the real founding year.
