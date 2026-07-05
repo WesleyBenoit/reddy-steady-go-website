@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+  <rect width="400" height="300" fill="#7d8286"/>
+  <rect width="400" height="180" fill="#9aa0a3"/>
+  <rect width="400" height="180" fill="#8a8f92" opacity="0.5"/>
+  <polygon points="0,300 130,140 400,140 400,300" fill="#c7c5c1"/>
+  <polygon points="0,300 130,140 155,140 30,300" fill="#d8d6d2" opacity="0.5"/>
+  <line x1="60" y1="230" x2="330" y2="230" stroke="#b0aea9" stroke-width="3"/>
+  <line x1="95" y1="190" x2="360" y2="190" stroke="#b0aea9" stroke-width="3"/>
+  <line x1="140" y1="150" x2="390" y2="150" stroke="#b0aea9" stroke-width="2"/>
+  <polygon points="140,140 200,60 260,140" fill="#43484b"/>
+  <polygon points="160,140 200,80 240,140" fill="#2a2f32"/>
+  <rect x="185" y="40" width="30" height="24" fill="#2a2f32"/>
+  <circle cx="345" cy="55" r="26" fill="#e0a233" opacity="0.85"/>
+</svg>

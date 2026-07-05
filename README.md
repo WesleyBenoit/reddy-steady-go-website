@@ -11,6 +11,11 @@ Plain HTML/CSS/JS, no build step required. Pages:
 - `about.html` — company story, leadership, values, timeline
 - `contact.html` — contact info, hours, map, estimate request form
 
+## Logo &amp; imagery
+
+- `assets/logo-icon.svg` — custom vector mark (trowel + level bubble in a navy/gold seal) used as the header/footer badge and the browser favicon on every page.
+- `assets/illustrations/{concrete,masonry,paving,repair}.svg` — custom flat-illustration scenes standing in for real job-site photography (a house/driveway pour, a brick wall, a paved lot, a slab-repair cross-section). These are **illustrations, not photographs of actual completed work**. Swap them for real photos by replacing the `background-image: url('assets/illustrations/...')` inline style on each `.gallery-tile` / `.case-study-media` element with a real photo path.
+
 ## Confirmed business info
 
 - Owner: Kris Reddy
@@ -24,7 +29,7 @@ Search the codebase for these and swap in real content:
 
 1. **Business hours** — `index.html` topbar, `contact.html` hours table (currently Mon–Fri 7–5, placeholder).
 2. **Testimonials** — `index.html` testimonial section has 3 sample quotes marked "Placeholder Reviewer." Replace with real Yelp/Google reviews (with permission).
-3. **Gallery photos** — `gallery.html` and the homepage gallery preview use CSS-gradient tiles instead of real photos. Add real project photos to an `images/` folder and swap each `.gallery-tile` background/`<img>` in.
+3. **Gallery photos** — `gallery.html`, `services.html`, and the homepage gallery preview use the custom SVG illustrations in `assets/illustrations/` instead of real photos (see "Logo & imagery" above). Add real project photos and swap each tile's `background-image` in.
 4. **Company history / timeline** — `about.html` has a generic founding/growth/today timeline; replace with real dates and milestones.
 5. **Canonical domain** — all pages use `https://reddysteadygo.com/` as a placeholder canonical/OG URL. Update once a real domain is chosen (or point it at the GitHub Pages URL).
 6. **Social links** — Instagram link points to `https://www.instagram.com/reddy.go/` (found via search, unverified); Facebook/Yelp footer icons are `#` placeholders.
