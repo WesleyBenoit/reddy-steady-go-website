@@ -13,6 +13,7 @@
   --color-ink: #23272a;
   --color-muted: #666e73;
   --color-amber: #e0a233;
+  --color-amber-dark: #8a5f08; /* WCAG AA text color on white (5.6:1); --color-amber alone fails at 2.2:1 */
   --color-white: #ffffff;
 
   /* Institutional / capability-statement accents */
@@ -65,6 +66,21 @@ img {
   display: inline-block;
   vertical-align: -0.15em;
   flex-shrink: 0;
+}
+
+/* Consistent, high-contrast keyboard focus ring for every interactive
+   element. More specific :focus-visible rules elsewhere (form fields,
+   FAQ summaries) override this harmlessly with the same color. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 a {
@@ -681,7 +697,7 @@ section:not(.section-dark) .feature-icon {
   display: block;
 }
 .testimonial .stars {
-  color: var(--color-amber);
+  color: var(--color-amber-dark);
   font-size: 1.2rem;
   letter-spacing: 3px;
   margin-bottom: 18px;
@@ -1139,7 +1155,7 @@ section:not(.section-dark) .feature-icon {
 /* ---------- Placeholder callout ---------- */
 .placeholder-note {
   background: #fff7e6;
-  border: 1px dashed var(--color-amber);
+  border: 1px dashed var(--color-amber-dark);
   color: #7a5b16;
   border-radius: var(--radius-sm);
   padding: 12px 16px;

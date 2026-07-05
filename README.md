@@ -42,6 +42,16 @@ Every field in `js/data.js` is currently a placeholder — see the TODO comments
 - `assets/icons.svg` is a hand-drawn SVG sprite (`<symbol>` defs, referenced via `<use href="assets/icons.svg#icon-name">`) that replaces every emoji glyph previously used for icons — phone, star, concrete/masonry/paving/wrench, lock, dollar, home, check, shield, clipboard, briefcase, building, landmark, clock, chat. All five certification badges intentionally reuse the same `shield` icon (differentiated by label text), matching real trust-badge conventions.
 - `js/main.js`'s `initScrollReveal()` fades/slides cards, stats, badges, and similar blocks into view on scroll via `IntersectionObserver`, and is a no-op if the browser has no `IntersectionObserver` support or the visitor has `prefers-reduced-motion: reduce` set. Gallery tiles and individual testimonial slides are deliberately excluded since other scripts show/hide them via `display`, which doesn't retrigger the observer.
 
+## Accessibility
+
+- **Landmarks**: `<header>`, one `<nav aria-label="Primary">`, `<main id="main">`, `<footer>` on every page; a skip link (first focusable element) jumps straight to `#main`. Exactly one `<h1>` per page.
+- **Focus states**: every interactive element (links, buttons, form fields, `<summary>`) gets a consistent 2px red `:focus-visible` ring (see `css/styles.css`, just after the `.icon` rule) — nothing relies on an easy-to-miss browser default.
+- **Forms**: every input has a real associated `<label for="">`; validation errors are announced via `role="alert"`/`role="status"` and tied to fields with `aria-invalid`.
+- **Link text**: the four "Learn more →" service links per page (repeated across the homepage and all service-area pages) got `aria-label`s naming the specific service, since identical link text is a real screen-reader-navigation problem (WCAG 2.4.4).
+- **Gallery "images"**: the gallery/service tiles use CSS `background-image`, not `<img>` — deliberately. A screen reader doesn't expose a CSS background as an image at all, so there's no missing "alt text" to add; the real content (e.g. "Stamped Patio — Concrete · Residential") is already in visible, readable text next to each tile. Adding `role="img"` there would make it *worse*, since screen readers treat `role="img"` elements as leaf nodes and would start ignoring that real text in favor of a shorter label.
+- **Color contrast**: audited all text/background color pairs against WCAG AA. Found and fixed two real failures — the gold star rating in testimonials (2.2:1 on white) and the placeholder-note's dashed border (2.1:1) both used `--color-amber` directly on light backgrounds; both now use a new `--color-amber-dark` (5.6:1) instead. Every other pairing already passed.
+- **Keyboard**: verified end-to-end with simulated Tab/Enter — logical tab order (skip link → topbar phone → logo → nav → header CTA → page content), the FAQ accordion (native `<details>`/`<summary>`), mobile nav toggle, and gallery filter buttons all operate correctly with keyboard only, no mouse.
+
 ## Logo &amp; imagery
 
 - `assets/logo-icon.svg` — custom vector mark (trowel + level bubble in a navy/gold seal) used as the header/footer badge and the browser favicon on every page.
