@@ -12,7 +12,7 @@ No build step is required. The site is plain HTML, CSS, and JavaScript.
 - `gallery.html` - visual guide to common project types and scope review considerations
 - `about.html` - owner-led company overview and operating standards
 - `contact.html` - written estimate request page with contact FAQ schema
-- `areas/index.html` plus city pages for Papillion, Bellevue, La Vista, Elkhorn, and Council Bluffs
+- `areas/index.html` plus city pages for Omaha, Papillion, Bellevue, La Vista, Elkhorn, Gretna, Bennington, Ralston, Millard, and Council Bluffs
 - `404.html` - branded fallback page for static hosting
 
 ## SEO And AEO Support
@@ -46,6 +46,8 @@ No build step is required. The site is plain HTML, CSS, and JavaScript.
 - Capabilities page includes a one-click company-info copy action for buyers and prime contractors.
 - Desktop visitors get a page-aware quick-action dock for planning, calling, estimates, and buyer information.
 - Contact forms remain static-hosting friendly: without a Web3Forms key they validate fields and open a prefilled email.
+- `js/site-config.js` can enable GA4 tracking, a Google Business Profile link, Search Console verification, and Web3Forms direct form delivery without editing every page.
+- `js/tracking.js` tracks phone clicks, email clicks, estimate CTA clicks, form attempts, successful lead submissions, form errors, and UTM/referrer attribution when GA4 is configured.
 
 ## Assets
 
@@ -64,8 +66,9 @@ The generated construction photos are representative visuals, not photos of comp
 
 - Real business hours across HTML topbars, contact page table, and JSON-LD opening hours
 - Exact latitude/longitude for 13811 L Street in every LocalBusiness JSON-LD block
-- Optional Web3Forms access key in `js/forms.js` if you want direct form delivery. Without it, forms validate and open a prefilled email to `Kris@reddysteadygo.com`.
-- Custom domain, if one replaces the current GitHub Pages URL
+- Optional Web3Forms access key in `js/site-config.js` if you want direct form delivery. Without it, forms validate and open a prefilled email to `Kris@reddysteadygo.com`.
+- Optional GA4 Measurement ID, Search Console verification value, and Google Business Profile URL in `js/site-config.js`
+- Custom domain DNS and GitHub Pages HTTPS status
 - Social profile URLs; the footer currently keeps only the Instagram link
 - Any certification, registration, bonding, safety, or review claims before publishing them
 - Real project photos, if available, to replace generated representative photos

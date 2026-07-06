@@ -20,7 +20,7 @@ Reddy Steady Go LLC is an Omaha, Nebraska contractor providing concrete, masonry
 
 ## Service Areas
 
-Omaha, Papillion, La Vista, Bellevue, Ralston, Millard, Elkhorn, Gretna, and Council Bluffs.
+Omaha, Papillion, La Vista, Bellevue, Elkhorn, Gretna, Bennington, Ralston, Millard, and Council Bluffs.
 
 ## Buyer And Procurement Notes
 
@@ -31,10 +31,11 @@ Reddy Steady Go LLC works with homeowners, property managers, commercial operato
 - The visual identity uses the supplied RSG shield/road logo and a black, red, gold, and concrete-silver theme.
 - The homepage includes an interactive project planner that helps visitors create a concise estimate request for concrete, masonry, commercial paving, or concrete repair work.
 - The contact form can receive a prefilled estimate message from the planner and falls back to a prefilled email when no form-service key is configured.
+- The website includes configurable GA4/conversion tracking and attribution fields for estimate forms.
 - The capabilities page includes a buyer hub with a procurement packet request link, bid intake checklist, and print-ready capability page.
 - The capabilities page includes a one-click company information copy action for procurement and prime-contractor review.
 - Desktop visitors get a page-aware quick-action dock for project planning, phone calls, estimates, and buyer information.
-- The homepage service-area router points visitors to local pages for Papillion, Bellevue, La Vista, Elkhorn, Council Bluffs, and the Omaha metro.
+- The homepage service-area router points visitors to local pages for Omaha, Papillion, Bellevue, La Vista, Elkhorn, Gretna, Bennington, Ralston, Millard, Council Bluffs, and the Omaha metro.
 
 ## Key Pages
 
@@ -42,4 +43,9 @@ Reddy Steady Go LLC works with homeowners, property managers, commercial operato
 - Services: https://reddysteadygo.com/services.html
 - Capabilities: https://reddysteadygo.com/capabilities.html
 - Service Areas: https://reddysteadygo.com/areas/
+- Omaha: https://reddysteadygo.com/areas/omaha.html
+- Gretna: https://reddysteadygo.com/areas/gretna.html
+- Bennington: https://reddysteadygo.com/areas/bennington.html
+- Ralston: https://reddysteadygo.com/areas/ralston.html
+- Millard: https://reddysteadygo.com/areas/millard.html
 - Contact: https://reddysteadygo.com/contact.html

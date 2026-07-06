@@ -1,7 +1,6 @@
 (function () {
   "use strict";
 
-  var WEB3FORMS_ACCESS_KEY = "";
   var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
   var ESTIMATE_EMAIL = "Kris@reddysteadygo.com";
 
@@ -60,18 +59,23 @@
         return;
       }
 
-      if (!WEB3FORMS_ACCESS_KEY) {
+      var accessKey = getWeb3FormsAccessKey();
+      if (!accessKey) {
+        trackLeadEvent("lead_email_fallback", form);
         openMailFallback(form, successBox);
         return;
       }
 
-      submitToWeb3Forms(form, submitBtn, submitLabel, successBox, errorBox);
+      submitToWeb3Forms(form, submitBtn, submitLabel, successBox, errorBox, accessKey);
     });
   }
 
-  function submitToWeb3Forms(form, submitBtn, submitLabel, successBox, errorBox) {
+  function submitToWeb3Forms(form, submitBtn, submitLabel, successBox, errorBox, accessKey) {
     var formData = new FormData(form);
-    formData.set("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.set("access_key", accessKey);
+    formData.set("page_url", window.location.href);
+    formData.set("page_title", document.title);
+    appendAttributionFields(formData);
 
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -90,12 +94,15 @@
         if (data.success) {
           form.reset();
           showStatus(successBox, "Thanks. Your message has been sent. We will follow up within one business day.");
+          trackLeadEvent("lead_form_submit", form);
         } else {
           showStatus(errorBox, data.message || "Something went wrong. Please call (402) 415-9253 instead.");
+          trackLeadEvent("lead_form_error", form);
         }
       })
       .catch(function () {
         showStatus(errorBox, "Network error. Your message was not sent. Please call (402) 415-9253 instead.");
+        trackLeadEvent("lead_form_error", form);
       })
       .finally(function () {
         if (submitBtn) {
@@ -114,6 +121,9 @@
     });
 
     lines.push("");
+    lines.push("Page: " + window.location.href);
+    addAttributionLines(lines);
+    lines.push("");
     lines.push("Sent from reddysteadygo website form.");
 
     var href =
@@ -126,6 +136,40 @@
 
     window.location.href = href;
     showStatus(successBox, "Your email app is opening with the estimate request. Send the email to complete your request.");
+  }
+
+  function getWeb3FormsAccessKey() {
+    var config = window.RSG_CONFIG || {};
+    return config.web3FormsAccessKey ? config.web3FormsAccessKey.trim() : "";
+  }
+
+  function appendAttributionFields(formData) {
+    var attribution = getAttribution();
+    Object.keys(attribution).forEach(function (key) {
+      formData.set(key, attribution[key]);
+    });
+  }
+
+  function addAttributionLines(lines) {
+    var attribution = getAttribution();
+    if (attribution.landing_page) lines.push("Landing page: " + attribution.landing_page);
+    if (attribution.referrer) lines.push("Referrer: " + attribution.referrer);
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"].forEach(function (key) {
+      if (attribution[key]) lines.push(key + ": " + attribution[key]);
+    });
+  }
+
+  function getAttribution() {
+    return window.RSGAttribution || {};
+  }
+
+  function trackLeadEvent(eventName, form) {
+    if (typeof window.RSGTrack !== "function") return;
+    var service = getFieldValue(form, "Service") || getFieldValue(form, "service");
+    window.RSGTrack(eventName, {
+      form_id: form.id || form.getAttribute("name") || "website_form",
+      service: service
+    });
   }
 
   function collectVisibleFields(form) {
