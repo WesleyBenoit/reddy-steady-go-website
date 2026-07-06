@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Reddy Steady Go LLC — site stylesheet
-   Omaha, NE — Masonry, Concrete & Commercial Paving
+   Reddy Steady Go LLC - site stylesheet
+   Omaha, NE - Masonry, Concrete & Commercial Paving
    ========================================================================== */
 
 :root {
@@ -1252,6 +1252,26 @@ section:not(.section-dark) .feature-icon {
 .form-card textarea:focus {
   outline: 2px solid var(--color-red);
   outline-offset: 1px;
+}
+.form-card input[type="file"] {
+  padding: 10px 12px;
+}
+.form-card input[type="file"]::file-selector-button {
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-charcoal);
+  color: var(--color-white);
+  font: inherit;
+  font-weight: 700;
+  padding: 8px 12px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+.form-hint {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  margin-top: 7px;
 }
 .form-note {
   font-size: 0.82rem;

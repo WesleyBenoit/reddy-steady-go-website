@@ -118,7 +118,7 @@ a{color:inherit;text-decoration:none}
       "name": "What information should I include when requesting an estimate?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Include your name, phone number, project address, service needed, project details, site access notes, and preferred timeline so Reddy Steady Go LLC can prepare the next step for a written estimate."
+        "text": "Include your name, phone number, project address, service needed, project type, budget range, project size, photos or a photo link, site access notes, and preferred timeline so Reddy Steady Go LLC can prepare the next step for a written estimate."
       }
     },
     {
@@ -252,10 +252,10 @@ a{color:inherit;text-decoration:none}
 
         <div class="form-card">
           <h3>Send Project Details</h3>
-          <p style="color:var(--color-muted);margin-bottom:24px;">Fields marked * are required. Include the address, service type, site notes, and timeline so we can prepare the next step.</p>
+          <p style="color:var(--color-muted);margin-bottom:24px;">Fields marked * are required. The optional fields help Kris price, schedule, and follow up faster.</p>
           <div class="form-success" id="form-success" role="status">Thanks &mdash; your message has been sent. We'll follow up within one business day.</div>
           <div class="form-error" id="form-error" role="alert"></div>
-          <form id="contact-form" action="mailto:Kris@reddysteadygo.com" method="post" enctype="text/plain" data-web3forms data-success-target="form-success" data-error-target="form-error">
+          <form id="contact-form" action="mailto:Kris@reddysteadygo.com" method="post" enctype="multipart/form-data" data-web3forms data-success-target="form-success" data-error-target="form-error">
             <input type="hidden" name="subject" value="New estimate request from reddysteadygo website" />
             <input type="hidden" name="from_name" value="Reddy Steady Go Website" />
             <label class="honeypot-field" aria-hidden="true">
@@ -282,6 +282,27 @@ a{color:inherit;text-decoration:none}
                 <label for="address">Project Address</label>
                 <input id="address" name="Project Address" type="text" />
               </div>
+              <div>
+                <label for="project-type">Project Type</label>
+                <select id="project-type" name="Project Type">
+                  <option value="">Select type&hellip;</option>
+                  <option>Homeowner / Residential</option>
+                  <option>Commercial Property</option>
+                  <option>General Contractor</option>
+                  <option>Municipal / Public Work</option>
+                </select>
+              </div>
+              <div>
+                <label for="budget">Budget Range</label>
+                <select id="budget" name="Budget Range">
+                  <option value="">Not sure yet</option>
+                  <option>Under $2,500</option>
+                  <option>$2,500 - $7,500</option>
+                  <option>$7,500 - $15,000</option>
+                  <option>$15,000 - $50,000</option>
+                  <option>$50,000+</option>
+                </select>
+              </div>
               <div class="full">
                 <label for="service">Service Needed *</label>
                 <select id="service" name="Service" required>
@@ -294,14 +315,56 @@ a{color:inherit;text-decoration:none}
                 </select>
                 <span class="field-error" id="service-error"></span>
               </div>
+              <div>
+                <label for="timeline">Project Timeline</label>
+                <select id="timeline" name="Project Timeline">
+                  <option value="">Select timing&hellip;</option>
+                  <option>Planning / Budgeting</option>
+                  <option>Ready For Site Review</option>
+                  <option>Needs Scheduling Soon</option>
+                  <option>Urgent Repair</option>
+                </select>
+              </div>
+              <div>
+                <label for="contact-method">Preferred Contact</label>
+                <select id="contact-method" name="Preferred Contact Method">
+                  <option>Phone Call</option>
+                  <option>Text Message</option>
+                  <option>Email</option>
+                </select>
+              </div>
+              <div>
+                <label for="contact-time">Best Time To Reach You</label>
+                <select id="contact-time" name="Best Contact Time">
+                  <option>Anytime</option>
+                  <option>Morning</option>
+                  <option>Midday</option>
+                  <option>Afternoon</option>
+                  <option>Early Evening</option>
+                </select>
+              </div>
+              <div>
+                <label for="dimensions">Approximate Size</label>
+                <input id="dimensions" name="Approximate Size" type="text" placeholder="Example: 20x40 driveway" />
+              </div>
+              <div class="full">
+                <label for="photo-link">Photo, Plan, or Map Link</label>
+                <input id="photo-link" name="Photo or Plan Link" type="url" placeholder="Paste a Google Drive, Dropbox, or photo link" />
+              </div>
+              <div class="full">
+                <label for="attachment">Upload Site Photo or Plan</label>
+                <input id="attachment" class="file-input" name="attachment" type="file" accept="image/jpeg,image/png,image/webp,application/pdf,.jpg,.jpeg,.png,.webp,.pdf" data-max-file-size="5242880" aria-describedby="attachment-hint" />
+                <span class="form-hint" id="attachment-hint">Optional: one JPG, PNG, WebP, or PDF under 5 MB. If your email app opens, attach the file before sending.</span>
+                <span class="field-error" id="attachment-error"></span>
+              </div>
               <div class="full">
                 <label for="message">Project Details *</label>
-                <textarea id="message" name="Message" rows="5" required></textarea>
+                <textarea id="message" name="Message" rows="6" placeholder="Describe the current surface, access, drainage, tear-out needs, finish preference, or anything that affects scheduling." required></textarea>
                 <span class="field-error" id="message-error"></span>
               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px;">Request Written Estimate</button>
-            <p class="form-note">For faster response, call (402) 415-9253.</p>
+            <p class="form-note">For faster response, call (402) 415-9253. Photos, measurements, and timing details help reduce follow-up questions.</p>
           </form>
         </div>
       </div>
@@ -317,7 +380,7 @@ a{color:inherit;text-decoration:none}
       <div class="answer-grid">
         <article class="answer-card">
           <h3>What information should I include?</h3>
-          <p>Include your name, phone number, project address, service needed, project details, site access notes, and preferred timeline.</p>
+          <p>Include your name, phone number, project address, service needed, project type, budget range, project size, photos or a photo link, site access notes, and preferred timeline.</p>
         </article>
         <article class="answer-card">
           <h3>How quickly do you respond?</h3>

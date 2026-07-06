@@ -135,10 +135,16 @@
 
   function getFormContext(form) {
     var serviceField = form.querySelector('[name="Service"], [name="service"]');
+    var projectTypeField = form.querySelector('[name="Project Type"]');
+    var timelineField = form.querySelector('[name="Project Timeline"]');
+    var budgetField = form.querySelector('[name="Budget Range"]');
     return {
       form_id: form.id || form.getAttribute("name") || "website_form",
       form_name: form.getAttribute("aria-label") || form.getAttribute("data-form-name") || "",
-      service: serviceField ? serviceField.value : ""
+      service: serviceField ? serviceField.value : "",
+      project_type: projectTypeField ? projectTypeField.value : "",
+      timeline: timelineField ? timelineField.value : "",
+      budget_range: budgetField ? budgetField.value : ""
     };
   }
 

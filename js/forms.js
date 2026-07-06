@@ -84,7 +84,6 @@
 
     fetch(WEB3FORMS_ENDPOINT, {
       method: "POST",
-      headers: { Accept: "application/json" },
       body: formData
     })
       .then(function (response) {
@@ -135,7 +134,7 @@
       encodeURIComponent(lines.join("\n"));
 
     window.location.href = href;
-    showStatus(successBox, "Your email app is opening with the estimate request. Send the email to complete your request.");
+    showStatus(successBox, getFallbackSuccessMessage(form));
   }
 
   function getWeb3FormsAccessKey() {
@@ -168,7 +167,10 @@
     var service = getFieldValue(form, "Service") || getFieldValue(form, "service");
     window.RSGTrack(eventName, {
       form_id: form.id || form.getAttribute("name") || "website_form",
-      service: service
+      service: service,
+      project_type: getFieldValue(form, "Project Type"),
+      timeline: getFieldValue(form, "Project Timeline"),
+      budget_range: getFieldValue(form, "Budget Range")
     });
   }
 
@@ -176,12 +178,38 @@
     var fields = [];
     form.querySelectorAll("input, select, textarea").forEach(function (field) {
       if (!field.name || field.type === "hidden" || field.name === "botcheck") return;
-      var value = field.value ? field.value.trim() : "";
+      var value = getFieldSummaryValue(field);
       if (!value) return;
       var label = findLabelText(form, field) || field.name;
       fields.push({ label: label.replace(/\s*\*$/, ""), value: value });
     });
     return fields;
+  }
+
+  function getFieldSummaryValue(field) {
+    if (field.type === "file") {
+      if (!field.files || !field.files.length) return "";
+      return Array.prototype.slice
+        .call(field.files)
+        .map(function (file) {
+          return file.name + " (" + formatFileSize(file.size) + ") - attach manually if your email app opens";
+        })
+        .join(", ");
+    }
+    return field.value ? field.value.trim() : "";
+  }
+
+  function getFallbackSuccessMessage(form) {
+    if (hasFileUploads(form)) {
+      return "Your email app is opening with the estimate request. Attach your photo or plan file before sending the email to complete your request.";
+    }
+    return "Your email app is opening with the estimate request. Send the email to complete your request.";
+  }
+
+  function hasFileUploads(form) {
+    return Array.prototype.some.call(form.querySelectorAll('input[type="file"]'), function (field) {
+      return field.files && field.files.length;
+    });
   }
 
   function findLabelText(form, field) {
@@ -208,16 +236,20 @@
 
   function validateForm(form) {
     var firstInvalid = null;
-    var fields = form.querySelectorAll("input[required], select[required], textarea[required], input[type=email]");
+    var fields = form.querySelectorAll("input[required], select[required], textarea[required], input[type=email], input[type=url], input[type=file]");
     fields.forEach(function (field) {
       var message = "";
       if (field.hasAttribute("required") && !field.value.trim()) {
         message = "This field is required.";
       } else if (field.type === "email" && field.value.trim() && !isValidEmail(field.value.trim())) {
         message = "Enter a valid email address.";
+      } else if (field.type === "url" && field.value.trim() && !isValidUrl(field.value.trim())) {
+        message = "Enter a valid link, starting with https://.";
       } else if (field.hasAttribute("data-phone-format") && field.value.trim()) {
         var digits = field.value.replace(/\D/g, "");
         if (digits.length !== 10) message = "Enter a 10-digit phone number.";
+      } else if (field.type === "file" && field.files && field.files.length) {
+        message = validateFileField(field);
       }
 
       if (message) {
@@ -251,5 +283,51 @@
 
   function isValidEmail(value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function isValidUrl(value) {
+    try {
+      var url = new URL(value);
+      return url.protocol === "https:" || url.protocol === "http:";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function validateFileField(field) {
+    var maxSize = parseInt(field.getAttribute("data-max-file-size") || "0", 10);
+    var acceptedTypes = (field.getAttribute("accept") || "")
+      .split(",")
+      .map(function (type) {
+        return type.trim();
+      })
+      .filter(Boolean);
+
+    for (var i = 0; i < field.files.length; i += 1) {
+      var file = field.files[i];
+      if (maxSize && file.size > maxSize) {
+        return "File must be under " + formatFileSize(maxSize) + ".";
+      }
+      if (acceptedTypes.length && !isAcceptedFile(file, acceptedTypes)) {
+        return "Use a JPG, PNG, WebP, or PDF file.";
+      }
+    }
+
+    return "";
+  }
+
+  function isAcceptedFile(file, acceptedTypes) {
+    var extension = "." + file.name.split(".").pop().toLowerCase();
+    return acceptedTypes.some(function (type) {
+      if (type.charAt(0) === ".") return type.toLowerCase() === extension;
+      if (type.indexOf("/*") !== -1) return file.type.indexOf(type.replace("/*", "/")) === 0;
+      return file.type === type;
+    });
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1048576) return Math.round(bytes / 102.4) / 10 + " KB";
+    return Math.round(bytes / 104857.6) / 10 + " MB";
   }
 })();
